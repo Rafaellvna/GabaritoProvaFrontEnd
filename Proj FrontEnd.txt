@@ -14,7 +14,7 @@ npm install -g npm@9.6.2
 npm -v(Visualiza a versão do npm)
 
 //IMPORTAR CSS(Site: https://react-bootstrap.github.io/)
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css' (No components Pagina)
 
 //CRIAR PROJETO
 npx create-next-app@latest introducao --use-npm --example https://github.com/vercel/next-learn/tree/master/basics/learn-starter(Site: https://nextjs.org/)
@@ -45,6 +45,18 @@ const [filmes, setFilmes] = useState([])
 
     }, [])
 
+//SERVICES API
+const { default: axios } = require("axios");
+
+const apiFilmes = axios.create({
+    baseURL: 'https://api.themoviedb.org/3',
+    headers: {
+        Authorization: 'Bearer ' + process.env.API_KEY_TMDB
+    }
+})
+
+export default apiFilmes
+
 //SITE API FILMES
 https://www.themoviedb.org/
 Google -> Public API github -> https://github.com/public-apis/public-apis
@@ -52,6 +64,8 @@ Google -> Public API github -> https://github.com/public-apis/public-apis
 //SERVER SIDE PROPS(BACKEND DO NEXT JS) -> Next JS(Site) -> Get Started -> getServerSideProps
 export async function getServerSideProps(context) {
 
+    const id = context.params.id -> (Essa variável "const id" vai na rota [id].js. Na rota index.js não precisa)
+    
     const resultado = await apiFilmes.get('/movie/popular')
     const filmes = resultado.data.results
 

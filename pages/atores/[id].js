@@ -1,3 +1,4 @@
+import Fotos from '@/components/Fotos'
 import Pagina from '@/components/Pagina'
 import apiFilmes from '@/services/apiFilmes'
 import React from 'react'
@@ -18,32 +19,9 @@ function Atores({ ator, atores, filmesAtuou, seriesAtuou }) {
         </Col>
       </Row><br />
 
-      <h2>Imagens</h2>
-      <Row md={6}>
-        {atores.map(item => (
-          <Col>
-            <Card.Img className='m-1' variant="top" src={"https://image.tmdb.org/t/p/w500/" + item.file_path} />
-          </Col>
-        ))}
-      </Row><br />
-
-      <h2>Filmes em que atuou</h2>
-      <Row md={6}>
-        {filmesAtuou.map(item => (
-          <Col>
-            <Card.Img className='m-1' variant="top" src={"https://image.tmdb.org/t/p/w500/" + item.poster_path} />
-          </Col>
-        ))}
-      </Row><br />
-
-      <h2>Séries de TV em que atuou</h2>
-      <Row md={6}>
-        {seriesAtuou.map(item => (
-          <Col>
-            <Card.Img className='m-1' variant="top" src={"https://image.tmdb.org/t/p/w500/" + item.poster_path} />
-          </Col>
-        ))}
-      </Row>
+      <Fotos titulo='Imagens' lista={atores} foto={'file_path'} />
+      <Fotos titulo='' lista={filmesAtuou} foto={'poster_path'} />
+      <Fotos titulo='Séries de TV em que atuou' lista={seriesAtuou} foto={'poster_path'} />
 
     </Pagina>
   )
